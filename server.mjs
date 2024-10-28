@@ -1,22 +1,42 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import connectDB from './config/db.mjs';
-import userRoutes from './routes/userRoutes.mjs';
-import bookRoutes from './routes/bookRoutes.mjs';
-import reviewRoutes from './routes/reviewRoutes.mjs';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 dotenv.config();
-connectDB();
 
 const app = express();
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 5001; //Change 5000 to 5001
 
-app.use('/api/users', userRoutes);
-app.use('/api/books', bookRoutes);
-app.use('/api/reviews', reviewRoutes);
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      
+    });
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection failed:', error);
+    process.exit(1); // Exit the process if the connection fails
+  }
+};
 
-const PORT = process.env.PORT || 5000;
+connectDB();
+
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
+
+// Handle uncaught exceptions and promise rejections
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1); // Exit the process
+});
+
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled Rejection:', error);
+  process.exit(1); // Exit the process
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
