@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBA319 Book Review App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>SBA319 Book Review Application</h1>
+        <nav>
+            <button id="registerBtn">Register</button>
+            <button id="loginBtn">Login</button>
+            <button id="viewBooksBtn">View Books</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="formSection" class="hidden">
+            <h2 id="formTitle"></h2>
+            <form id="userForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="email" id="email" placeholder="Email" required class="hidden">
+                <button type="submit" id="submitBtn">Submit</button>
+            </form>
+        </section>
+
+        <section id="booksSection" class="hidden">
+            <h2>Available Books</h2>
+            <ul id="booksList"></ul>
+        </section>
+
+        <section id="reviewsSection" class="hidden">
+            <h2>Submit a Review</h2>
+            <form id="reviewForm">
+                <select id="bookSelect" required></select>
+                <textarea id="reviewContent" placeholder="Write your review here..." required></textarea>
+                <input type="number" id="reviewRating" min="1" max="5" placeholder="Rating (1-5)" required>
+                <button type="submit">Submit Review</button>
+            </form>
+            <div id="reviewsList"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
