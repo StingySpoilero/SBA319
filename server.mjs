@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001; //Change 5000 to 5001
+const PORT = process.env.PORT || 5001;
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -16,25 +16,14 @@ const connectDB = async () => {
     console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection failed:', error);
-    process.exit(1); // Exit the process if the connection fails
+    process.exit(1); // Exit if connection fails
   }
 };
 
 connectDB();
 
 app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
-
-// Handle uncaught exceptions and promise rejections
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
-  process.exit(1); // Exit the process
-});
-
-process.on('unhandledRejection', (error) => {
-  console.error('Unhandled Rejection:', error);
-  process.exit(1); // Exit the process
+  res.send('Server is running on port ' + PORT);
 });
 
 app.listen(PORT, () => {
